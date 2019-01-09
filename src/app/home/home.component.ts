@@ -1,4 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { CropperDialogComponent } from './cropper-dialog/cropper-dialog.component';
 import Cropper from 'cropperjs';
 
 enum Cropped_State {
@@ -14,6 +16,11 @@ interface ImageList {
   imgEditsList?: Array<ElementRef<HTMLImageElement>>; // used for redo/undos
 }
 
+export interface DialogData {
+  name: string;
+  image: ElementRef<HTMLImageElement>
+}
+
 @Component({
   selector: 'crp-home',
   templateUrl: './home.component.html',
@@ -25,7 +32,7 @@ export class HomeComponent implements OnInit {
   cropper: Cropper;
   sourceImage = './../assets/cat_pic640_360_nofilter.jpg';
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -47,4 +54,21 @@ export class HomeComponent implements OnInit {
     this.cropper.destroy();
   }
 
+  openDialog() {
+    console.log('Opening dialog...');
+
+    const dialogRef = this.dialog.open(CropperDialogComponent, {
+      width: '400px',
+      data: {
+        name: 'imageName',
+        image: this.imgSourceEl.nativeElement
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+
+  }
 }
