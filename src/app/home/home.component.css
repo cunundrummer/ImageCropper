@@ -1,0 +1,8 @@
+/* Limit image width to avoid overflow the container */
+div > .containter {
+  max-width: 400px;
+}
+img {
+  border: 1px solid black;
+  max-width: 100%; /* This rule is very important, please do not ignore this! */
+}

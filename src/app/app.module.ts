@@ -14,7 +14,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ImageCropperModule
   ],
   providers: [],
   bootstrap: [AppComponent]
