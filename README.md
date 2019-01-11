@@ -1,6 +1,7 @@
 # ImageCropperExp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.4.  
+This project is an experiment to test the functionality of Cropperjs to use with angular in order to implent into other projects. 
 
 ## Development server
 
