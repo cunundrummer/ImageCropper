@@ -1,5 +1,5 @@
 /* Limit image width to avoid overflow the container */
-div > .containter {
+div > .container {
   max-width: 400px;
 }
 img {

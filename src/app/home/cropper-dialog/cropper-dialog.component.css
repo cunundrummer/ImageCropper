@@ -1,0 +1,17 @@
+img {
+  border: 1px solid black;
+  max-width: 100%; /* This rule is very important, please do not ignore this! */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 640px;
+  margin: auto;
+}
+
+.options {
+  flex-direction: row;
+}
+

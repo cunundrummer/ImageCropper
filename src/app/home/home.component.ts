@@ -18,7 +18,7 @@ interface ImageList {
 
 export interface DialogData {
   name: string;
-  image: ElementRef<HTMLImageElement>
+  image: string;
 }
 
 @Component({
@@ -37,31 +37,15 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  openCropper() {
-    this.cropper = new Cropper(this.imgSourceEl.nativeElement, {
-      aspectRatio: 16 / 9,
-      ready() {
-        console.log('Ready!');
-      }
-    });
-  }
-
-  cropImage() {
-    // console.log(imgurl);
-
-    this.imgSourceEl.nativeElement.src = this.cropper.getCroppedCanvas().toDataURL();
-    console.log(this.cropper.getImageData());
-    this.cropper.destroy();
-  }
-
   openDialog() {
     console.log('Opening dialog...');
 
     const dialogRef = this.dialog.open(CropperDialogComponent, {
-      width: '400px',
+      width: this.imgSourceEl.nativeElement.width + '100px',
+      height: this.imgSourceEl.nativeElement.height + '50px',
       data: {
         name: 'imageName',
-        image: this.imgSourceEl.nativeElement
+        image: this.sourceImage
       }
     });
 
