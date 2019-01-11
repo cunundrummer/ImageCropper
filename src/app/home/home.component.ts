@@ -2,19 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { CropperDialogComponent } from './cropper-dialog/cropper-dialog.component';
 
-enum Cropped_State {
-  CROPPED,
-  NOT_CROPPED,
-  PENDING
-}
-
-interface ImageList {
-  numImages: number;
-  origImgSource?: ElementRef<HTMLImageElement>;
-  croppedState?: Cropped_State;
-  imgEditsList?: Array<ElementRef<HTMLImageElement>>; // used for redo/undos
-}
-
 export interface DialogData {
   name: string;
   image: string;
@@ -28,7 +15,7 @@ export interface DialogData {
 export class HomeComponent implements OnInit {
   @ViewChild('sourceImageEl') imgSourceEl: ElementRef<HTMLImageElement>;
 
-  sourceImage = './../assets/cat_pic640_360_nofilter.jpg';
+  sourceImage = './../assets/cat_pic640_360_nofilter.jpg'; // original file
 
   constructor(public dialog: MatDialog) { }
 
@@ -47,11 +34,12 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
       console.log(result);
-      this.imgSourceEl.nativeElement.src = result.nativeElement.src;
+      const newImg = new Image().src = result;
+      this.sourceImage = result;
+      this.imgSourceEl.nativeElement.src = newImg; // result;
     });
-
   }
 }

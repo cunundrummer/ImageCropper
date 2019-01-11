@@ -47,15 +47,11 @@ export class CropperDialogComponent implements OnInit, AfterViewInit {
 
   crop() {
     console.log('cropping image...');
-    this.imgSourceEl.nativeElement.src = this.cropper.getCroppedCanvas().toDataURL();
+    this.imgSourceEl.nativeElement.src = this.cropper.getCroppedCanvas().toDataURL('image/png');
     console.log(this.cropper.getImageData());
     this.isCropped = true;
     this.cropper.destroy();
     this.cropper = null;
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
   rotate(direction: 'right' | 'left') {
@@ -72,6 +68,6 @@ export class CropperDialogComponent implements OnInit, AfterViewInit {
   }
 
   save() {
-    this.dialogRef.close(this.imgSourceEl);
+    this.dialogRef.close(this.imgSourceEl.nativeElement.src);
   }
 }
