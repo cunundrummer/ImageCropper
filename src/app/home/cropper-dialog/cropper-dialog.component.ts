@@ -10,7 +10,6 @@ import Cropper from 'cropperjs';
 })
 export class CropperDialogComponent implements OnInit, AfterViewInit {
   @ViewChild('sourceImageEl') imgSourceEl: ElementRef<HTMLImageElement>;
- //  @ViewChild('preview') preview: ElementRef;
 
   cropper: Cropper;
   isCropped: Boolean = false;
@@ -38,7 +37,6 @@ export class CropperDialogComponent implements OnInit, AfterViewInit {
     this.cropper = new Cropper(this.imgSourceEl.nativeElement, {
       aspectRatio: NaN,
       viewMode: 1,
-      // preview: this.preview.nativeElement,
       ready() {
         console.log('Ready!');
       }
@@ -48,7 +46,7 @@ export class CropperDialogComponent implements OnInit, AfterViewInit {
   }
 
   crop() {
-    console.log('saving new image...');
+    console.log('cropping image...');
     this.imgSourceEl.nativeElement.src = this.cropper.getCroppedCanvas().toDataURL();
     console.log(this.cropper.getImageData());
     this.isCropped = true;
@@ -71,5 +69,9 @@ export class CropperDialogComponent implements OnInit, AfterViewInit {
       default:
         break;
     }
+  }
+
+  save() {
+    this.dialogRef.close(this.imgSourceEl);
   }
 }
